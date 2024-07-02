@@ -22,6 +22,6 @@ async def square_number(input: NumberInput):
     print(f"Received number: {input.number}, Result: {result}")  # 添加日誌
     return {"result": result}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="localhost", port=8000)
