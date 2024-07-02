@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數字平方計算器</title>
+    <script>
+        async function squareNumber() {
+            const number = document.getElementById('numberInput').value;
+            const resultElement = document.getElementById('result');
+            
+            try {
+                const response = await fetch('http://0.0.0.0:8080/square', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ number: parseInt(number) }),
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                resultElement.textContent = `結果: ${data.result}`;
+            } catch (error) {
+                resultElement.textContent = `錯誤: ${error.message}`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>數字平方計算器</h1>
+    <input type="number" id="numberInput" placeholder="輸入一個數字">
+    <button onclick="squareNumber()">計算平方</button>
+    <p id="result"></p>
+</body>
+</html>
